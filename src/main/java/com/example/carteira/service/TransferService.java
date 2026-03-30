@@ -1,6 +1,9 @@
 
 package com.example.carteira.service;
 
+import com.example.carteira.exceptions.InsufficientBalanceException;
+import com.example.carteira.exceptions.UnauthorizedUserException;
+import com.example.carteira.exceptions.UserNotFoundException;
 import com.example.carteira.model.User;
 import com.example.carteira.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -17,15 +20,20 @@ public class TransferService {
     }
 
     public void transfer(Long fromId, Long toId, BigDecimal valor) {
-        User from = userRepository.findById(fromId).orElseThrow();
-        User to = userRepository.findById(toId).orElseThrow();
+        if(fromId == toId || valor.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new UnauthorizedUserException("Operação inválida. Verifique as informações.");
+        }
+        
+        User from = userRepository.findById(fromId)
+            .orElseThrow(() -> new UserNotFoundException("Usuário não encontrado com ID: " + fromId));
+        User to = userRepository.findById(toId).orElseThrow(() -> new UserNotFoundException("Usuário não encontrado com ID: " + fromId));
 
         if (from.isLojista()) {
-            throw new RuntimeException("Ação não permitida para lojistas");
+            throw new UnauthorizedUserException("Ação não permitida para lojistas");
         }
 
         if (from.getSaldo().compareTo(valor) < 0) {
-            throw new RuntimeException("Saldo insuficiente");
+            throw new InsufficientBalanceException("Saldo insuficiente");
         }
 
         from.setSaldo(from.getSaldo().subtract(valor));

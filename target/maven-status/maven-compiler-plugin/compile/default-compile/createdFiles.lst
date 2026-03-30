@@ -1,0 +1,14 @@
+com\example\carteira\exceptions\GlobalExceptionHandler.class
+com\example\carteira\exceptions\DuplicateResourceException.class
+com\example\carteira\model\User.class
+com\example\carteira\controller\UserController.class
+com\example\carteira\CarteiraApplication.class
+com\example\carteira\repository\UserRepository.class
+com\example\carteira\service\UserService.class
+com\example\carteira\exceptions\UserNotFoundException.class
+com\example\carteira\model\User$PublicView.class
+com\example\carteira\model\User$InternalView.class
+com\example\carteira\exceptions\InsufficientBalanceException.class
+com\example\carteira\service\TransferService.class
+com\example\carteira\exceptions\UnauthorizedUserException.class
+com\example\carteira\controller\TransferController.class

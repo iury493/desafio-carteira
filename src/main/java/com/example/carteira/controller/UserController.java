@@ -2,8 +2,11 @@
 package com.example.carteira.controller;
 
 import com.example.carteira.model.User;
-import com.example.carteira.repository.UserRepository;
+import com.example.carteira.model.User.PublicView;
 import com.example.carteira.service.TransferService;
+import com.example.carteira.service.UserService;
+import com.fasterxml.jackson.annotation.JsonView;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -12,17 +15,18 @@ import java.math.BigDecimal;
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserRepository userRepository;
     private final TransferService transferService;
+    private final UserService userService;
 
-    public UserController(UserRepository userRepository, TransferService transferService) {
-        this.userRepository = userRepository;
+
+    public UserController( TransferService transferService, UserService userService) {
+        this.userService = userService;
         this.transferService = transferService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public User create(@RequestBody User user) {
-        return userRepository.save(user);
+        return userService.createUser(user);
     }
 
     @PostMapping("/transfer")
@@ -34,7 +38,8 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
+    @JsonView(PublicView.class)
     public User get(@PathVariable Long id) {
-        return userRepository.findById(id).orElseThrow();
+        return userService.findById(id);
     }
 }

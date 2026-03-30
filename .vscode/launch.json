@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-CarteiraApplication<carteira>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.carteira.CarteiraApplication",
+            "projectName": "carteira",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
