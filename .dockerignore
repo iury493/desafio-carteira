@@ -1,0 +1,31 @@
+# Arquivos de controle de versão
+.git/
+.gitignore
+
+# Arquivos de build
+target/
+*.jar
+*.war
+*.ear
+
+# Arquivos de configuração do IDE
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# Arquivos de log
+*.log
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos de teste
+src/test/
+
+# Outros
+.mvn/
+.mvn/wrapper/maven-wrapper.jar
