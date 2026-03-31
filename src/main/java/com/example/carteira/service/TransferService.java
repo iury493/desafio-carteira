@@ -1,4 +1,3 @@
-
 package com.example.carteira.service;
 
 import com.example.carteira.exceptions.InsufficientBalanceException;
@@ -26,7 +25,7 @@ public class TransferService {
         
         User from = userRepository.findById(fromId)
             .orElseThrow(() -> new UserNotFoundException("Usuário não encontrado com ID: " + fromId));
-        User to = userRepository.findById(toId).orElseThrow(() -> new UserNotFoundException("Usuário não encontrado com ID: " + fromId));
+        User to = userRepository.findById(toId).orElseThrow(() -> new UserNotFoundException("Usuário não encontrado com ID: " + toId));
 
         if (from.isLojista()) {
             throw new UnauthorizedUserException("Ação não permitida para lojistas");
